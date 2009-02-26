@@ -16,9 +16,13 @@
 		<link rel="stylesheet" href="../ext-air/resources/ext-air.css" type="text/css" />
 		
 		<script type="text/javascript" charset="utf-8">
+			Ext.BLANK_IMAGE_URL = '../extjs/resources/images/default/s.gif';
+			var prefsFile = air.File.applicationStorageDirectory.resolvePath('preferences.txt');
+			
 			$(function() {
-				Ext.BLANK_IMAGE_URL = '../extjs/resources/images/default/s.gif';
 				Ext.QuickTips.init();
+				
+				// define viewport
 				var viewport = new Ext.Viewport({
 					layout: 'border',
 					renderTo: $('body'),
@@ -58,6 +62,9 @@
 						defaultText: 'Idle'
 					}] 
 				});
+				
+				// read account info
+				getPrefs();
 			});
 		</script>
 	</head>

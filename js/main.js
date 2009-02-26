@@ -1,5 +1,39 @@
-/* settings */
-air.NativeApplication.nativeApplication.autoExit = true;
+/* megaupload specific info */
+var username = '';
+var password = '';
+var cookie = '';
+
+var login_url = 'http://www.megaupload.com/?c=account';
+var multifetch_url = 'http://www.megaupload.com/?c=multifetch';
+
+/* exit handler */
+var app = air.NativeApplication.nativeApplication;
+app.autoExit = true;
+app.addEventListener(air.Event.EXITING, exitHandler); 
+
+var separator = '<~|~>';
+
+/* deal with prefs */
+function exitHandler(event) {
+	var username = Ext.getCmp('username').getRawValue();
+	var password = Ext.getCmp('password').getRawValue();
+	var stream = new air.FileStream();
+	stream.open(prefsFile, air.FileMode.WRITE);
+	stream.writeUTFBytes([username, password].join(separator));
+	stream.close();
+}
+
+function getPrefs() {
+	var stream = new air.FileStream();
+	if (prefsFile.exists) {
+		stream.open(prefsFile, air.FileMode.READ);
+		var prefs = stream.readUTFBytes(stream.bytesAvailable);
+		var data = prefs.split(separator);
+		Ext.getCmp('username').setValue(data[0]);
+		Ext.getCmp('password').setValue(data[1]);
+		stream.close();
+	}
+}
 
 /* definitions */
 var store =  new Ext.data.Store({
@@ -31,15 +65,6 @@ var grid = new Ext.grid.GridPanel({
 		handler: fetch
 	}]
 });
-
-/* megaupload specific info */
-
-var username = '';
-var password = '';
-var cookie = '';
-
-var login_url = 'http://www.megaupload.com/?c=account';
-var multifetch_url = 'http://www.megaupload.com/?c=multifetch';
 
 /* import */
 function browseTXT(event) {
