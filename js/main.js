@@ -43,7 +43,7 @@ var multifetch_url = 'http://www.megaupload.com/?c=multifetch';
 
 /* import */
 function browseTXT(event) {
-	var defaultDir = air.File.documentsDirectory;
+	var defaultDir = air.File.userDirectory;
 	var fileChooser = defaultDir;
 	fileChooser.browseForOpen('Open');
 	fileChooser.addEventListener(air.Event.SELECT, doImport);
