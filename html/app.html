@@ -31,7 +31,13 @@
 						xtype: 'toolbar', 
 						items: [{
 							xtype: 'tbbutton',
-							text: 'Import from file',
+							text: 'Import',
+							icon: '../images/paste_plain.png',
+							cls: 'x-btn-text-icon',
+							handler: ask
+						}, {
+							xtype: 'tbbutton',
+							text: 'Import from file...',
 							icon: '../images/page_white_get.png',
 							cls: 'x-btn-text-icon',
 							handler: browseTXT

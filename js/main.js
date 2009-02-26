@@ -75,6 +75,18 @@ var grid = new Ext.grid.GridPanel({
 });
 
 /* import */
+function ask(event) {
+	Ext.Msg.prompt('Import', 'Paste some links here', function(btn, text) {
+		if (btn == 'ok') {
+			var links = text.match(/(ftp|https?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/ig);
+			grid.getStore().removeAll();
+			$.each(links, function(i, link) {
+				grid.getStore().insert(i, new model({link: link, status: 'Not yet started'}));
+			});
+		}
+	}, this, 100);
+}
+
 function browseTXT(event) {
 	var defaultDir = air.File.userDirectory;
 	var fileChooser = defaultDir;
