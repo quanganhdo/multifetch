@@ -55,6 +55,14 @@ var grid = new Ext.grid.GridPanel({
 		{header: 'Status', dataIndex: 'status', sortable: true}
 	],
 	bbar: [{
+		xtype: 'tbbutton',
+		text: 'Clear list',
+		icon: '../images/cross.png',
+		cls: 'x-btn-text-icon',
+		handler: function() {
+			grid.getStore().removeAll();
+		}
+	}, {
 		xtype: 'tbfill'
 	}, {
 		xtype: 'tbbutton',
