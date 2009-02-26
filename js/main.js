@@ -17,8 +17,8 @@ var grid = new Ext.grid.GridPanel({
 	frame: true,
 	store: store,
 	columns: [
-		{header: 'Link to fetch', dataIndex: 'link'},
-		{header: 'Status', dataIndex: 'status'}
+		{header: 'Link to fetch', dataIndex: 'link', sortable: true},
+		{header: 'Status', dataIndex: 'status', sortable: true}
 	],
 	bbar: [{
 		xtype: 'tbfill'
@@ -96,7 +96,7 @@ function realFetch() {
 		row.data.status = 'Submitting...';
 		grid.getView().refresh();
 		$.post(multifetch_url, {fetchurl: row.get('link'), description: row.get('link'), youremail: '', receiveremail: '', password: '', multiplerecipients: ''}, function(data) {
-			row.data.status = 'Submitted';
+			row.data.status = 'Added to queue';
 			grid.getView().refresh();
 		});
 	});
