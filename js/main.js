@@ -54,7 +54,7 @@ function doImport(event) {
 	var currentFile = event.target;
 	stream.open(currentFile, air.FileMode.READ);
 	
-	var links = stream.readUTFBytes(stream.bytesAvailable).match(/(((https?|ftp)):\/\/([\-\w]+\.)+\w{2,3}(\/[%\-\w]+(\.\w{2,})?)*(([\w\-\.\?\\\/+@&#;`~=%!]*)(\.\w{2,})?)*\/?)/ig);
+	var links = stream.readUTFBytes(stream.bytesAvailable).match(/(ftp|https?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/ig);
 	grid.getStore().removeAll();
 	$.each(links, function(i, link) {
 		grid.getStore().insert(i, new model({link: link, status: 'Not yet started'}));
