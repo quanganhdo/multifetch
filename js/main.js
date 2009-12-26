@@ -140,7 +140,7 @@ function realFetch() {
 	grid.getStore().each(function(row) {
 		row.data.status = 'Submitting...';
 		grid.getView().refresh();
-		$.post(multifetch_url, {fetchurl: row.get('link'), description: row.get('link'), youremail: '', receiveremail: '', password: '', multiplerecipients: ''}, function(data) {
+		$.post(multifetch_url, {fetchurl: row.get('link'), description: 'Lorem ipsum dolor sit amet', youremail: '', receiveremail: '', password: '', multiplerecipients: ''}, function(data) {
 			row.data.status = 'Added to queue';
 			grid.getView().refresh();
 		});
